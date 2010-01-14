@@ -1,0 +1,5 @@
+Changelog for Text-Sass
+
+0.2 - Simple nesting; a few more tests
+
+0.1 - Started implementing examples from sass-lang homepage. Basic static conversion seems to work ok.

@@ -1,0 +1,7 @@
+Text-Sass - A Perl implementation of Sass http://sass-lang.com/
+
+This is most definitely a work-in-progress. It only implements a
+subset of the specification but it's being actively developed so if
+there's functionality missing, drop me a line at rmp@psyphi.net and
+send me a patch.
+

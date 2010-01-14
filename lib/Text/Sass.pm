@@ -8,11 +8,10 @@
 package Text::Sass;
 use strict;
 use warnings;
-#use Data::Dumper;
 use Carp;
 use English qw(-no_match_vars);
 
-our $VERSION = q[0.1];
+our $VERSION = q[0.2];
 
 sub new {
   my ($class, $ref) = @_;
@@ -47,7 +46,7 @@ sub sass2css {
 
   my $stash = {};
   $self->_parse_sass($str, $stash);
-#  print Dumper($stash);
+#  use Data::Dumper; print Dumper($stash);
   return $self->_stash2css($stash);
 }
 
@@ -58,8 +57,8 @@ sub _parse_sass {
 
   for my $g (@{$groups}) {
     my @lines = split /\n/smx, $g;
-    while(my $line = shift @lines) {
 
+    while(my $line = shift @lines) {
       #########
       # !x = y
       #
@@ -83,16 +82,18 @@ sub _parse_sass {
       #########
       # static-attr: value
       #
-      $line =~ s{^(\S+):\s*(.*)$}{
+      $line =~ s{^(\S+)\s*:\s*(.*)$}{
         $substash->{$1} = $2;
       }smxegi;
 
       #########
       #   <indented sub-content>
       #
-      $line =~ s{^[ ][ ](.*)}{
-                              $self->_parse_sass($1, $substash);
-                             }smxegi;
+      $line =~ s{^[ ][ ](.*?)$}{
+        my $remaining = join "\n", $1, @lines;
+        $self->_parse_sass($remaining, $substash);
+        @lines = ();
+      }smxegi;
 
       #########
       # // comments
@@ -108,6 +109,7 @@ sub _parse_sass {
       #
     }
   }
+
   return 1;
 }
 
@@ -147,7 +149,8 @@ sub _parse_css {
 
 sub _stash2css {
   my ($self, $stash) = @_;
-  my $groups = [];
+  my $groups  = [];
+  my $delayed = [];
 
   for my $k (keys %{$stash}) {
     if($k =~ /^__/smx) {
@@ -157,10 +160,26 @@ sub _stash2css {
     my $str .= "$k {\n";
     for my $attr (sort keys %{$stash->{$k}}) {
       my $val = $stash->{$k}->{$attr};
+
+      if($attr =~ /:$/smx) {
+	my $rattr = $attr;
+	$rattr =~ s/:$//smx;
+	for my $k2 (sort keys %{$val}) {
+	  $str .= "  $rattr-$k2: $val->{$k2};\n";
+	}
+	next;
+      }
+
+      if(ref $val) {
+	push @{$delayed}, $self->_stash2css({"$k $attr" => $val});
+	next;
+      }
+
       $str .= "  $attr: $val;\n";
     }
     $str .= "}\n";
     push @{$groups}, $str;
+    push @{$groups}, @{$delayed};
   }
 
   return join "\n", @{$groups};

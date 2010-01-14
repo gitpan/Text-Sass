@@ -1,6 +1,14 @@
+Changes
 MANIFEST
+README
+Text-Sass-0.1.tar.gz
 lib/Text/Sass.pm
+t/00-critic.t
+t/00-distribution.t
+t/00-pod.t
+t/00-podcoverage.t
 t/10-beauty.t
+t/20-nesting.t
 Makefile.PL
 Build.PL
 META.yml
