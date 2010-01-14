@@ -1,5 +1,9 @@
 Changelog for Text-Sass
 
+0.4 - Mixins, very rough. Already regretting not using a proper parser/grammar/tokeniser etc.
+
+0.3 - Variables, operators, colour handling
+
 0.2 - Simple nesting; a few more tests
 
 0.1 - Started implementing examples from sass-lang homepage. Basic static conversion seems to work ok.

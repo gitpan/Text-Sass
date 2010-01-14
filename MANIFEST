@@ -1,6 +1,7 @@
 Changes
 MANIFEST
 README
+examples/README
 lib/Text/Sass.pm
 lib/Text/Sass/Expr.pm
 t/00-critic.t
@@ -11,6 +12,7 @@ t/05-expr.t
 t/10-beauty.t
 t/20-nesting.t
 t/30-variables.t
+t/40-mixins.t
 Makefile.PL
 Build.PL
 META.yml

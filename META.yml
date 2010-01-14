@@ -1,6 +1,6 @@
 ---
 name: Text-Sass
-version: 0.3
+version: 0.4
 author:
   - 'Roger Pettett <rmp@psyphi.net>'
 abstract: 'Text-Sass - Perl implementation of http://sass-lang.com/'
@@ -22,7 +22,7 @@ configure_requires:
 provides:
   Text::Sass:
     file: lib/Text/Sass.pm
-    version: 0.3
+    version: 0.4
   Text::Sass::Expr:
     file: lib/Text/Sass/Expr.pm
     version: 0.1

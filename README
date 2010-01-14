@@ -7,3 +7,10 @@ send me a patch.
 
 And yes, this should all really be done with a proper language tools,
 i.e. grammar, parser, tokeniser etc.
+
+Bugs & Limitations
+ - Compound class/id/element are unreliable:
+   .element1, .element2
+     ...
+
+ - Variables are currently global. This can be quite unpleasant.
