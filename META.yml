@@ -1,6 +1,6 @@
 ---
 name: Text-Sass
-version: 0.2
+version: 0.3
 author:
   - 'Roger Pettett <rmp@psyphi.net>'
 abstract: 'Text-Sass - Perl implementation of http://sass-lang.com/'
@@ -13,6 +13,8 @@ build_requires:
   Test::Perl::Critic: 1.01
 requires:
   Carp: 1.04
+  English: 1.04
+  Readonly: 1.03
   strict: 1.03
   warnings: 1.05
 configure_requires:
@@ -20,7 +22,10 @@ configure_requires:
 provides:
   Text::Sass:
     file: lib/Text/Sass.pm
-    version: 0.2
+    version: 0.3
+  Text::Sass::Expr:
+    file: lib/Text/Sass/Expr.pm
+    version: 0.1
 generated_by: Module::Build version 0.35
 meta-spec:
   url: http://module-build.sourceforge.net/META-spec-v1.4.html

@@ -1,14 +1,16 @@
 Changes
 MANIFEST
 README
-Text-Sass-0.1.tar.gz
 lib/Text/Sass.pm
+lib/Text/Sass/Expr.pm
 t/00-critic.t
 t/00-distribution.t
 t/00-pod.t
 t/00-podcoverage.t
+t/05-expr.t
 t/10-beauty.t
 t/20-nesting.t
+t/30-variables.t
 Makefile.PL
 Build.PL
 META.yml

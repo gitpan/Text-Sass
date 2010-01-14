@@ -5,3 +5,5 @@ subset of the specification but it's being actively developed so if
 there's functionality missing, drop me a line at rmp@psyphi.net and
 send me a patch.
 
+And yes, this should all really be done with a proper language tools,
+i.e. grammar, parser, tokeniser etc.

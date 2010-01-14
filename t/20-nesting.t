@@ -1,7 +1,7 @@
 use strict;
 use warnings;
 use Text::Sass;
-use Test::More tests => 1;
+use Test::More tests => 2;
 
 {
   my $sass_str = <<"EOT";
@@ -22,7 +22,7 @@ table.hl td.ln {
 EOT
 
   my $sass = Text::Sass->new();
-#  is($sass->sass2css($sass_str), $css_str, 'sass2css');
+  is($sass->sass2css($sass_str), $css_str, 'sass2css');
 }
 
 {

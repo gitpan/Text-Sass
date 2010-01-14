@@ -8,6 +8,7 @@
 use strict;
 use warnings;
 use Module::Build;
+use lib qw(lib);
 
 my $builder = Module::Build->new(
 				 module_name         => 'Text-Sass',
@@ -17,6 +18,8 @@ my $builder = Module::Build->new(
 				 license             => 'perl',
 				 requires            => {
 							 'Carp'                        => '1.04',
+							 'English'                     => '1.04',
+							 'Readonly'                    => '1.03',
 							 'strict'                      => '1.03',
 							 'warnings'                    => '1.05',
 							},

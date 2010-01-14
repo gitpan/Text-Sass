@@ -10,8 +10,9 @@ use strict;
 use warnings;
 use Carp;
 use English qw(-no_match_vars);
+use Text::Sass::Expr;
 
-our $VERSION = q[0.2];
+our $VERSION = q[0.3];
 
 sub new {
   my ($class, $ref) = @_;
@@ -33,7 +34,6 @@ sub css2sass {
 
   my $stash = {};
   $self->_parse_css($str, $stash);
-#  print Dumper($stash);
   return $self->_stash2sass($stash);
 }
 
@@ -46,7 +46,7 @@ sub sass2css {
 
   my $stash = {};
   $self->_parse_sass($str, $stash);
-#  use Data::Dumper; print Dumper($stash);
+#  use Data::Dumper; carp Dumper($stash);
   return $self->_stash2css($stash);
 }
 
@@ -64,6 +64,7 @@ sub _parse_sass {
       #
       $line =~ s{^!(\S+)\s*=\s*(.*)$}{
         $substash->{__variables}->{$1} = $2;
+        q[];
       }smxegi;
 
       #########
@@ -77,13 +78,15 @@ sub _parse_sass {
         @lines = ();
         $substash->{$1} = {};
         $self->_parse_sass($remaining, $substash->{$1});
+        q[];
       }smxegi;
 
       #########
-      # static-attr: value
+      # static & dynamic attr: value
       #
-      $line =~ s{^(\S+)\s*:\s*(.*)$}{
+      $line =~ s{^(\S+)\s*[:=]\s*(.*)$}{
         $substash->{$1} = $2;
+        q[];
       }smxegi;
 
       #########
@@ -93,6 +96,7 @@ sub _parse_sass {
         my $remaining = join "\n", $1, @lines;
         $self->_parse_sass($remaining, $substash);
         @lines = ();
+        q[];
       }smxegi;
 
       #########
@@ -101,12 +105,8 @@ sub _parse_sass {
       $line =~ s{\s*//(.*)}{
         $substash->{__comments} ||= [];
         push @{$substash->{__comments}}, $1;
+        q[];
       }smxegi;
-
-      #########
-      # TODO
-      # dynamic-attr = expression
-      #
     }
   }
 
@@ -163,9 +163,9 @@ sub _stash2css {
 
       if($attr =~ /:$/smx) {
 	my $rattr = $attr;
-	$rattr =~ s/:$//smx;
+	$rattr    =~ s/:$//smx;
 	for my $k2 (sort keys %{$val}) {
-	  $str .= "  $rattr-$k2: $val->{$k2};\n";
+	  $str .= "  $rattr-$k2: @{[$self->_expr($stash, $val->{$k2})]};\n";
 	}
 	next;
       }
@@ -175,7 +175,7 @@ sub _stash2css {
 	next;
       }
 
-      $str .= "  $attr: $val;\n";
+      $str .= "  $attr: @{[$self->_expr($stash, $val)]};\n";
     }
     $str .= "}\n";
     push @{$groups}, $str;
@@ -183,6 +183,22 @@ sub _stash2css {
   }
 
   return join "\n", @{$groups};
+}
+
+sub _expr {
+  my ($self, $stash, $expr) = @_;
+  my $vars = $stash->{__variables} || {};
+
+  $expr =~ s/!(\S+)/{$vars->{$1}||"!$1"}/smxeg;
+  $expr =~ s/[#](.)(.)(.)(\b)/#${1}${1}${2}${2}${3}${3}$4/smxgi;
+
+  my @parts = split /\s+/smx, $expr;
+
+  Readonly::Scalar my $binary_op_parts => 3;
+  if(scalar @parts == $binary_op_parts) {
+    return Text::Sass::Expr->expr(@parts);
+  }
+  return $expr;
 }
 
 sub _stash2sass {
@@ -264,17 +280,8 @@ $Author: Roger Pettett$
 
 =head1 LICENSE AND COPYRIGHT
 
-This program is free software: you can redistribute it and/or modify
-it under the terms of the GNU General Public License as published by
-the Free Software Foundation, either version 3 of the License, or
-(at your option) any later version.
-
-This program is distributed in the hope that it will be useful,
-but WITHOUT ANY WARRANTY; without even the implied warranty of
-MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-GNU General Public License for more details.
-
-You should have received a copy of the GNU General Public License
-along with this program.  If not, see <http://www.gnu.org/licenses/>.
+This library is free software; you can redistribute it and/or modify
+it under the same terms as Perl itself, either Perl version 5.8.10 or,
+at your option, any later version of Perl 5 you may have available.
 
 =cut
