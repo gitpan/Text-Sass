@@ -1,0 +1,7 @@
+MANIFEST
+lib/Text/Sass.pm
+t/10-beauty.t
+Makefile.PL
+Build.PL
+META.yml
+SIGNATURE    Added here by Module::Build
