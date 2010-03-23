@@ -1,5 +1,5 @@
 This file contains message digests of all files listed in MANIFEST,
-signed via the Module::Signature module, version 0.55.
+signed via the Module::Signature module, version 0.61.
 
 To verify the content in this distribution, first make sure you have
 Module::Signature installed, then type:
@@ -14,14 +14,14 @@ not run its Makefile.PL or Build.PL.
 -----BEGIN PGP SIGNED MESSAGE-----
 Hash: SHA1
 
-SHA1 4e288547993a4c598b718a0759d382c7ad4a8152 Build.PL
+SHA1 f955e95905e03016454b56691035c2b3d71a1e87 Build.PL
 SHA1 243bbbb7ab4cc6028d066970cf9c909da96eee32 Changes
-SHA1 d229579d384f46b5ce3c675f38930d5aaf961cc1 MANIFEST
-SHA1 35f3520e84eb1ef6536ec5390cbfb954343256c0 META.yml
-SHA1 77e450d85db6d9d5a4cb9dbb54901a8f3c9324f3 Makefile.PL
+SHA1 7923db002e24b602e58668250c3beaf1eed080d2 MANIFEST
+SHA1 30445378f588bb172f13558add0c32310fb97431 MANIFEST.SKIP
+SHA1 3f1837a15ced545e9ff3b7153b270e3a366fe637 META.yml
 SHA1 f2077d1b75137ca1afbf59c25c6434a5414efcf0 README
 SHA1 4d1afedc3f7f6afc6a909561779b5c53b794e10d examples/README
-SHA1 96b3c50283e0b21f8c5a441103612b4785229e47 lib/Text/Sass.pm
+SHA1 b11d12b8548e63f2c0cb5ecec6f0b1e69017462f lib/Text/Sass.pm
 SHA1 3efe68b86e8474984982d893ef542237294026f5 lib/Text/Sass/Expr.pm
 SHA1 32a2f6f8dea4c6a4782014cf8d68195d464e585d t/00-critic.t
 SHA1 682c07841092ca2d119efb4444027acb8f71c01b t/00-distribution.t
@@ -35,7 +35,17 @@ SHA1 e78220dea98a81c9590628f36cfefb04087444e7 t/40-mixins.t
 -----BEGIN PGP SIGNATURE-----
 Version: GnuPG v1.4.10 (Darwin)
 
-iEYEARECAAYFAktPgVIACgkQm9Enih71y9/x5ACePDYYQmfCBPFvKPVXldpo65/r
-osAAniotrFk5mxbUACluYHz8F7C2Xucf
-=xjzW
+iQIcBAEBAgAGBQJLqPOhAAoJEKRiRxpY9zRJFVEQALQNxLi71o01CY3cY3nf8ydz
+gGv0tSjCt6TITnARCjKsrLiWR5mHJjEbepHaWRCp8t87Lyw39z+EBy0DnlbtLPUO
+jSWExks6wWfyZYJTt2tW2JZ0n3kvXfkfNi+l/K8xSWv1tmdmej+4tpG+ljLqpQnn
+7JMkS/LTPD1fUTgzg/F7YQigfEuYUvYrmjFa9xuB49OBbSz5alyyvNK3L4h6oGpb
+emWd45yyOjSLZy4wjDvX4141L85UTxgGx8ErTP5CXCubS5lUcI9X1OP2/sCbLuWL
+QTLWNjbJHlbzpGOsakMYSy7tDb5J+nxT7ag/zeBiXyN4pGncYi0Q0i3GS668K93w
+akRYQvTn91BPMT5Paq0zgwjyL4/IVBYJk+JLjpPK71vzF8xrxiBQYilsOl+nMOX5
+VPeN8rRCraRHGcMzCxVF7uKrLcguScmRCgeQdiTDbE2C7E/b50p0J45FifGL2XMh
+v0v6KdG5a4HqNqM4UD2cxkj3atBQapANfOl58QWIwDBv0fCq/f29Zg0aRH3VV+Gy
+rey+srO4vcnns5Rw2C/KXiOeMQaC/uoIxUt7wySqVXw8K/dzWVu9Xki3ToiZ5SsE
+B5hqxHohK2bSQGz4UVSQzGgqt8b6wg/+wW2hj/oVDZVUer+f0vjQd26y0KGOk31p
+CkSXko4L5QCOSQDcroCN
+=0spF
 -----END PGP SIGNATURE-----

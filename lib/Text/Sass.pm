@@ -13,7 +13,7 @@ use English qw(-no_match_vars);
 use Text::Sass::Expr;
 use Data::Dumper;
 
-our $VERSION = q[0.4];
+our $VERSION = q[0.5];
 
 sub new {
   my ($class, $ref) = @_;
