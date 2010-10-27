@@ -1,5 +1,8 @@
 Changelog for Text-Sass
 
+0.6 - Better nesting, lots of haphazard debugging;
+      Thanks to tests & queries from Bjørn-Olav Strand
+
 0.4 - Mixins, very rough. Already regretting not using a proper parser/grammar/tokeniser etc.
 
 0.3 - Variables, operators, colour handling

@@ -4,7 +4,7 @@ use Text::Sass;
 use Test::More tests => 2;
 
 {
-  my $sass_str = <<"EOT";
+  my $sass_str = <<EOT;
 =table-scaffolding
   th
     text-align: center
@@ -14,7 +14,7 @@ use Test::More tests => 2;
   +table-scaffolding
 EOT
 
-  my $css_str = <<"EOT";
+  my $css_str = <<EOT;
 #data th {
   font-weight: bold;
   text-align: center;
@@ -26,7 +26,7 @@ EOT
 }
 
 {
-  my $sass_str = <<"EOT";
+  my $sass_str = <<EOT;
 =macro(!dist)
   margin-left = !dist
   float: left
@@ -35,7 +35,7 @@ EOT
   +macro(10px)
 EOT
 
-  my $css_str = <<"EOT";
+  my $css_str = <<EOT;
 #data {
   float: left;
   margin-left: 10px;
@@ -47,7 +47,7 @@ EOT
 }
 
 {
-  my $sass_str = <<"EOT";
+  my $sass_str = <<EOT;
 =table-scaffolding
   th
     text-align: center
@@ -64,7 +64,7 @@ EOT
   +table-scaffolding
 EOT
 
-  my $css_str = <<"EOT";
+  my $css_str = <<EOT;
 #data {
   float: left;
   margin-left: 10px;

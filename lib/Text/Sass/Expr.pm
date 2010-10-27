@@ -69,6 +69,9 @@ our $CONV = {
 sub expr {
   my ($pkg, $part1, $op, $part2) = @_;
 
+  $part1 =~ s/[#](.)(.)(.)(\b)/#${1}${1}${2}${2}${3}${3}$4/smxgi;
+  $part2 =~ s/[#](.)(.)(.)(\b)/#${1}${1}${2}${2}${3}${3}$4/smxgi;
+
   my ($p1, $u1) = @{$pkg->units($part1)};
   my ($p2, $u2) = @{$pkg->units($part2)};
 

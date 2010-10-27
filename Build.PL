@@ -18,7 +18,7 @@ my $builder = Module::Build->new(
 				 license             => 'perl',
 				 requires            => {
 							 'Carp'                        => '1.04',
-							 'English'                     => '1.03',
+							 'English'                     => '1.04',
 							 'Readonly'                    => '1.03',
 							 'strict'                      => '1.03',
 							 'warnings'                    => '1.05',
@@ -26,13 +26,14 @@ my $builder = Module::Build->new(
 				 recommends          => {
 							},
 				 build_requires      => {
-							 'Test::More'              => '0.8',
-							},
-				 build_recommends    => {
 							 'Test::Distribution'      => '2.00',
+							 'Test::More'              => '0.8',
 							 'Test::Perl::Critic'      => '1.01',
 							},
-				 sign                => 1,
+				 build_recommends    => {
+							},
+				 script_files        => qw(bin/sass2css.pl),
+#				 sign                => 1,
 				);
 
 $builder->create_build_script();

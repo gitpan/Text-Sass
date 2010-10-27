@@ -5,6 +5,10 @@
 # Source:        $Source$
 # $HeadURL$
 #
+# Note to reader:
+# Recursive regex processing can be very bad for your health.
+# Sass & SCSS are both pretty cool. This module is not.
+#
 package Text::Sass;
 use strict;
 use warnings;
@@ -13,7 +17,8 @@ use English qw(-no_match_vars);
 use Text::Sass::Expr;
 use Data::Dumper;
 
-our $VERSION = q[0.5];
+our $VERSION = q[0.6];
+our $DEBUG   = 0;
 
 sub new {
   my ($class, $ref) = @_;
@@ -56,7 +61,7 @@ sub sass2css {
 
 sub _parse_sass {
   my ($self, $str, $substash, $symbols) = @_;
-
+#carp qq[ENTERING _parse_sass];
   my $groups = [split /\n\s*?\n/smx, $str];
 
   for my $g (@{$groups}) {
@@ -68,12 +73,13 @@ sub _parse_sass {
       #
       $line =~ s{^!(\S+)\s*=\s*(.*?)$}{
         $symbols->{variables}->{$1} = $2;
-        q[];
+        $DEBUG and carp qq[VARIABLE $1 = $2];
+       q[];
       }smxegi;
 
       #########
-      # =x           and   =x(!var)
-      #   bla                bla
+      # =x              |      =x(!var)
+      #   bla           |        bla
       #
       # mixin declaration
       #
@@ -89,6 +95,7 @@ sub _parse_sass {
         #
         $symbols->{mixins}->{$func} = "$proto\n$remaining\n";
 #carp qq[STASHED MIXIN $func str=$symbols->{mixins}->{$func}];
+        $DEBUG and carp qq[MIXIN $func];
         q[];
       }smxegi;
 
@@ -98,14 +105,13 @@ sub _parse_sass {
       $line =~ s{^[+]([^(]+)$}{
         my $func      = $1;
         my $mixin_str = $symbols->{mixins}->{$func};
-
         $mixin_str    =~ s/^.*?\n//smx;
         my $result    = {};
         $self->_parse_sass($mixin_str, $result, $symbols);
         my $mixin_tag = (keys %{$result})[0];
         $substash->{$mixin_tag} = (values %{$result})[0];
 #carp qq[STATIC MIXIN func=$func tag=$mixin_tag str=$mixin_str results=\n].Dumper($substash->{$mixin_tag});
-
+        $DEBUG and carp qq[STATIC MIXIN $func / $mixin_tag];
         q[];
       }smxegi;
 
@@ -136,44 +142,81 @@ sub _parse_sass {
 #carp qq[DYNAMIC: result=].Dumper($result);
         $substash->{"+$func"} = $result;
 #carp qq[DYNAMIC MIXIN func=$func argstr=$argstr tag=$mixin_tag str=$mixin_str results=\n].Dumper($substash->{$mixin_tag});
-
-        q[];
-      }smxegi;
-
-
-      #########
-      # .class
-      # #id
-      # element
-      #   <following content>
-      #
-      $line =~ s{^([.#]?\S+)$}{
-        my $remaining   = join "\n", @lines;
-        @lines          = ();
-        $substash->{$1} = {};
-        $self->_parse_sass($remaining, $substash->{$1}, $symbols);
+        $DEBUG and carp qq[DYNAMIC MIXIN $func];
         q[];
       }smxegi;
 
       #########
       # static & dynamic attr: value
+      # color: #aaa
       #
       $line =~ s{^(\S+)\s*[:=]\s*(.*?)$}{
-#carp qq[ATTR $1 = $2];
-        $substash->{$1} = $2;
+        my $key = $1;
+        my $val = $2;
+        if($val =~ /^\s*$/smx) {
+          $substash->{"$key:"} = {};
+          my $remaining = join "\n", @lines;
+          @lines        = ();
+#          carp qq[ATTR CALLING DOWN REMAINING=$remaining ].Dumper($substash);
+          $self->_parse_sass($remaining, $substash->{"$key:"}, $symbols);
+        } else {
+          $substash->{$key} = $val;
+          $DEBUG and carp qq[ATTR $key = $val; LINE=$line];
+          $DEBUG and carp 'ATTR.SUBSTASH ', Dumper($substash);
+        }
         q[];
       }smxegi;
 
       #########
-      #   <indented sub-content>
+      #   <2-space indented sub-content>
       #
       $line =~ s{^[ ][ ](.*?)$}{
-        my $remaining = join "\n", $1, @lines;
-        @lines        = ();
+        my $process = [];
+
+        while (my $l = shift @lines) {
+          if($l =~ /^[ ][ ][ ][ ]/smx) {
+            push @{$process}, $l;
+          } else {
+            #########
+            # put it back where it came from
+            #
+            unshift @lines, $l;
+            last;
+          }
+        }
+        my $remaining = join "\n", $1, @{$process};
+
+# carp qq[INDENTED $line CALLING DOWN REMAINING=$remaining ].Dumper($substash);
         $self->_parse_sass($remaining, $substash, $symbols);
         q[];
       }smxegi;
 
+      #########
+      # .class
+      # #id
+      # element
+      # element2, element2
+      #   <following content>
+      #
+      $line =~ s{^(\S+.*?)$}{
+        my $one = $1;
+        $one    =~ s/\s+/ /smxg;
+
+        my $remaining     = join "\n", @lines;
+        @lines            = ();
+        $substash->{$one} = {};
+# carp qq[LINE=$line; ONE=$one; REMAINING $remaining];
+
+        $DEBUG and carp qq[ELEMENT $one descending with :: $remaining ::];
+        $DEBUG and carp Dumper($substash);
+        $self->_parse_sass($remaining, $substash->{$one}, $symbols);
+        $DEBUG and carp qq[ELEMENT $one returned];
+        $DEBUG and carp Dumper($substash);
+        q[];
+      }smxegi;
+
+
+      $DEBUG and $line and carp qq[REMAINING $line];
       #########
       # // comments
       #
@@ -231,33 +274,51 @@ sub _stash2css {
 #    if($k =~ /^__/smx) {
 #      next;
 #    }
+    my $vk = $k;
+    $vk    =~ s/\s+/ /smx;
 
-    my $str .= "$k {\n";
-    for my $attr (sort keys %{$stash->{$k}}) {
-      my $val = $stash->{$k}->{$attr};
+    my $str .= "$vk {\n";
+    if(!ref $stash->{$k}) {
+#      carp qq[NOT REF $k => ]. Dumper($stash);
+      $str .= sprintf q[ %s: %s], $vk, $stash->{$k};
 
-#      carp qq[___ATTR=$attr val=$val];
-      if($attr =~ /^[+]/smx) {
-	$attr=q[];
-      }
+    } else {
+      for my $attr (sort keys %{$stash->{$k}}) {
+	my $val = $stash->{$k}->{$attr};
 
-      if($attr =~ /:$/smx) {
-	my $rattr = $attr;
-	$rattr    =~ s/:$//smx;
-	for my $k2 (sort keys %{$val}) {
-	  $str .= "  $rattr-$k2: @{[$self->_expr($stash, $symbols, $val->{$k2})]};\n";
+	#      carp qq[___ATTR=$attr val=$val];
+	if($attr =~ /^[+]/smx) {
+	  $attr=q[];
 	}
-	next;
-      }
 
-      if(ref $val) {
-	my $rattr = $k . ($attr ? " $attr":q[]);
-	push @{$delayed}, $self->_stash2css({$rattr => $val}, $symbols);
-	next;
-      }
+	if($attr =~ /:$/smx) {
+	  #########
+	  # font:
+	  #   family: foo;
+	  #   size: bar;
+	  #
+	  my $rattr = $attr;
+	  $rattr    =~ s/:$//smx;
+	  for my $k2 (sort keys %{$val}) {
+	    $str .= sprintf qq[  %s-%s: %s;\n], $rattr, $k2, $self->_expr($stash, $symbols, $val->{$k2});
+	  }
+	  next;
+	}
 
-      $str .= "  $attr: @{[$self->_expr($stash, $symbols, $val)]};\n";
+	if(ref $val) {
+	  my $rattr = $k . ($attr ? " $attr":q[]);
+
+	  if($k =~ /,/smx) {
+	    $rattr = join q[, ], map { "$_ $attr" } split /[,\s]+/smx, $k;
+	  }
+	  push @{$delayed}, $self->_stash2css({$rattr => $val}, $symbols);
+	  next;
+	}
+
+	$str .= sprintf qq[  %s: %s;\n], $attr, $self->_expr($stash, $symbols, $val);
+      }
     }
+
     $str .= "}\n";
     if($str !~ /[{]\s*[}]/smx) {
       push @{$groups}, $str;
@@ -274,7 +335,7 @@ sub _expr {
 
 #carp qq[_EXPR VARS = ].Dumper($vars);
   $expr =~ s/!(\S+)/{$vars->{$1}||"!$1"}/smxeg;
-  $expr =~ s/[#](.)(.)(.)(\b)/#${1}${1}${2}${2}${3}${3}$4/smxgi;
+#  $expr =~ s/[#](.)(.)(.)(\b)/#${1}${1}${2}${2}${3}${3}$4/smxgi;
 
   my @parts = split /\s+/smx, $expr;
 
@@ -298,7 +359,7 @@ sub _stash2sass {
     my $str .= "$k\n";
     for my $attr (sort keys %{$stash->{$k}}) {
       my $val = $stash->{$k}->{$attr};
-      $str .= "  $attr: $val\n";
+      $str   .= sprintf qq[  %s: %s\n], $attr, $val;
     }
     push @{$groups}, $str;
   }
