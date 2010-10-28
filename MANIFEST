@@ -5,9 +5,6 @@ lib/Text/Sass/Expr.pm
 lib/Text/Sass.pm
 Makefile
 MANIFEST
-MANIFEST.bak
-MANIFEST.SKIP
-MANIFEST.SKIP.bak
 README
 t/00-critic.t
 t/00-distribution.t
@@ -19,6 +16,11 @@ t/20-nesting.t
 t/21-nesting.t
 t/30-variables.t
 t/40-mixins.t
+t/50-space.t
 t/90-regression-bos.t
+t/90-regression-wikipedia-comment.t
+t/90-regression-wikipedia-nowhitespace.t
+t/90-regression-wikipedia-parentref.t
+t/90-regression-wikipedia.t
 Build.PL
 META.yml

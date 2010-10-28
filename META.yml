@@ -17,7 +17,7 @@ name: Text-Sass
 provides:
   Text::Sass:
     file: lib/Text/Sass.pm
-    version: 0.6
+    version: 0.7
   Text::Sass::Expr:
     file: lib/Text/Sass/Expr.pm
     version: 0.1
@@ -29,4 +29,4 @@ requires:
   warnings: 1.05
 resources:
   license: http://dev.perl.org/licenses/
-version: 0.6
+version: 0.7
