@@ -38,8 +38,8 @@ EOT
   my $css_str = <<EOT;
 li {
   font-family: serif;
-  font-size: 1.2em;
   font-weight: bold;
+  font-size: 1.2em;
 }
 EOT
 #  $Text::Sass::DEBUG =1;

@@ -1,5 +1,10 @@
 Changelog for Text-Sass
 
+0.8 - Flexible indentation fixes, from Bjørn-Olav
+      Retain declaration order, from Bjørn-Olav
+
+0.7 - Better whitespace handling. Very hacky though. A handful of new tests.
+
 0.6 - Better nesting, lots of haphazard debugging;
       Thanks to tests & queries from Bjørn-Olav Strand
 

@@ -1,9 +1,9 @@
 #########
 # Author:        rmp
-# Last Modified: $Date$
-# Id:            $Id$
+# Last Modified: $Date: 2010-10-29 12:45:25 +0100 (Fri, 29 Oct 2010) $
+# Id:            $Id: 00-critic.t 37 2010-10-29 11:45:25Z zerojinx $
 # Source:        $Source$
-# $HeadURL$
+# $HeadURL: https://text-sass.svn.sourceforge.net/svnroot/text-sass/trunk/t/00-critic.t $
 #
 package critic;
 use strict;
@@ -32,7 +32,8 @@ if($EVAL_ERROR) {
 					     ValuesAndExpressions::ProhibitImplicitNewlines
 					     NamingConventions::Capitalization
 					     PodSpelling
- 					     ValuesAndExpressions::RequireConstantVersion)],
+ 					     ValuesAndExpressions::RequireConstantVersion
+					     ControlStructures::ProhibitDeepNests)],
 			    );
   all_critic_ok();
 }

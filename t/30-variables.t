@@ -19,15 +19,15 @@ use Test::More tests => 1;
 EOT
 
   my $css_str = <<"EOT";
-.border {
-  border-color: #3bbfce;
-  margin: 8px;
-  padding: 8px;
-}
-
 .content_navigation {
   border-color: #3bbfce;
   color: #2aaebd;
+}
+
+.border {
+  padding: 8px;
+  margin: 8px;
+  border-color: #3bbfce;
 }
 EOT
 

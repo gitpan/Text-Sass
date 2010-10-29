@@ -16,20 +16,20 @@ a
 EOT
 
   my $css = <<EOT;
-a {
-  text-decoration: none;
-}
-
-a .hot {
-  color: red;
-}
-
 #header {
   background: #FFFFFF;
 }
 
 #header .error {
   color: #FF0000;
+}
+
+a {
+  text-decoration: none;
+}
+
+a .hot {
+  color: red;
 }
 EOT
 
@@ -53,20 +53,20 @@ a
 EOT
 
   my $css = <<EOT;
-a {
-  text-decoration: none;
-}
-
-a .hot {
-  color: red;
-}
-
 #header {
   background: #FFFFFF;
 }
 
 #header .error {
   color: #FF0000;
+}
+
+a {
+  text-decoration: none;
+}
+
+a .hot {
+  color: red;
 }
 EOT
 

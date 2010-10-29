@@ -1,6 +1,7 @@
 bin/sass2css.pl
 Changes
 examples/README
+lib/Text/Sass/ColorFunctions.pm
 lib/Text/Sass/Expr.pm
 lib/Text/Sass.pm
 Makefile
@@ -14,13 +15,18 @@ t/05-expr.t
 t/10-beauty.t
 t/20-nesting.t
 t/21-nesting.t
+t/22-deep.t
 t/30-variables.t
 t/40-mixins.t
 t/50-space.t
+t/81-sass-ex.t
 t/90-regression-bos.t
-t/90-regression-wikipedia-comment.t
 t/90-regression-wikipedia-nowhitespace.t
 t/90-regression-wikipedia-parentref.t
 t/90-regression-wikipedia.t
+t/91-keep-order.t
+t/92-no-whitespace.t
+t/93-parentref-comma.t
+t/RT-62474-accept-spaces.t
 Build.PL
 META.yml

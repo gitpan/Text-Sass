@@ -22,10 +22,9 @@ EOT
   # form p label | form input.textbox | form button
   #
   my $css_str = <<EOT;
-form button {
-  background: red;
-  color: white;
-  padding: 10px 20px;
+form p label {
+  display: block;
+  font-weight: bold;
 }
 
 form input.textbox {
@@ -33,9 +32,10 @@ form input.textbox {
   color: #666;
 }
 
-form p label {
-  display: block;
-  font-weight: bold;
+form button {
+  color: white;
+  background: red;
+  padding: 10px 20px;
 }
 EOT
   my $sass = Text::Sass->new();

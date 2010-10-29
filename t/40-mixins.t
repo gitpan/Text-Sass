@@ -1,7 +1,9 @@
 use strict;
 use warnings;
 use Text::Sass;
-use Test::More tests => 2;
+use Test::More tests => 3;
+
+# $Text::Sass::DEBUG = 1;
 
 {
   my $sass_str = <<EOT;
@@ -16,8 +18,8 @@ EOT
 
   my $css_str = <<EOT;
 #data th {
-  font-weight: bold;
   text-align: center;
+  font-weight: bold;
 }
 EOT
 
@@ -37,8 +39,8 @@ EOT
 
   my $css_str = <<EOT;
 #data {
-  float: left;
   margin-left: 10px;
+  float: left;
 }
 EOT
 
@@ -78,6 +80,9 @@ EOT
 }
 EOT
 
+ SKIP: {
+  skip q[complex mixins don't work yet], 1;
   my $sass = Text::Sass->new();
-#  is($sass->sass2css($sass_str), $css_str, 'complex mixin, static + dynamic');
+  is($sass->sass2css($sass_str), $css_str, 'complex mixin, static + dynamic');
+ }
 }

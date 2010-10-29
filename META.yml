@@ -3,9 +3,8 @@ abstract: 'Text-Sass - Perl implementation of http://sass-lang.com/'
 author:
   - 'Roger Pettett <rmp@psyphi.net>'
 build_requires:
-  Test::Distribution: 2.00
   Test::More: 0.8
-  Test::Perl::Critic: 1.01
+  Try::Tiny: 0.06
 configure_requires:
   Module::Build: 0.36
 generated_by: 'Module::Build version 0.3603'
@@ -17,10 +16,15 @@ name: Text-Sass
 provides:
   Text::Sass:
     file: lib/Text/Sass.pm
-    version: 0.7
+    version: 0.8
+  Text::Sass::ColorFunctions:
+    file: lib/Text/Sass/ColorFunctions.pm
+    version: 0.1
   Text::Sass::Expr:
     file: lib/Text/Sass/Expr.pm
     version: 0.1
+recommends:
+  Data::Dumper: 2.125
 requires:
   Carp: 1.04
   English: 1.04
@@ -29,4 +33,4 @@ requires:
   warnings: 1.05
 resources:
   license: http://dev.perl.org/licenses/
-version: 0.7
+version: 0.8
