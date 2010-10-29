@@ -1,7 +1,7 @@
 #########
 # Author:        rmp
-# Last Modified: $Date: 2010-10-29 12:45:25 +0100 (Fri, 29 Oct 2010) $
-# Id:            $Id: Sass.pm 37 2010-10-29 11:45:25Z zerojinx $
+# Last Modified: $Date: 2010-10-29 12:52:18 +0100 (Fri, 29 Oct 2010) $
+# Id:            $Id: Sass.pm 40 2010-10-29 11:52:18Z zerojinx $
 # Source:        $Source$
 # $HeadURL: https://text-sass.svn.sourceforge.net/svnroot/text-sass/trunk/lib/Text/Sass.pm $
 #
@@ -17,7 +17,7 @@ use English qw(-no_match_vars);
 use Text::Sass::Expr;
 use Data::Dumper;
 
-our $VERSION = q[0.8];
+our $VERSION = q[0.8.1];
 our $DEBUG   = 0;
 
 sub new {
@@ -500,7 +500,7 @@ Text::Sass
 
 =head1 VERSION
 
-$LastChangedRevision: 37 $
+$LastChangedRevision: 40 $
 
 =head1 SYNOPSIS
 

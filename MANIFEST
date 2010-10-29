@@ -6,6 +6,7 @@ lib/Text/Sass/Expr.pm
 lib/Text/Sass.pm
 Makefile
 MANIFEST
+MANIFEST.SKIP
 README
 t/00-critic.t
 t/00-distribution.t

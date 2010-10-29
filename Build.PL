@@ -1,7 +1,7 @@
 #########
 # Author:        rmp
-# Last Modified: $Date: 2010-10-29 12:45:25 +0100 (Fri, 29 Oct 2010) $
-# Id:            $Id: Build.PL 37 2010-10-29 11:45:25Z zerojinx $
+# Last Modified: $Date: 2010-10-29 12:51:39 +0100 (Fri, 29 Oct 2010) $
+# Id:            $Id: Build.PL 39 2010-10-29 11:51:39Z zerojinx $
 # Source:        $Source$
 # $HeadURL: https://text-sass.svn.sourceforge.net/svnroot/text-sass/trunk/Build.PL $
 #
@@ -18,7 +18,7 @@ my $builder = Module::Build->new(
 				 license             => 'perl',
 				 requires            => {
 							 'Carp'                    => '1.04',
-							 'English'                 => '1.04',
+							 'English'                 => '1.02',
 							 'Readonly'                => '1.03',
 							 'strict'                  => '1.03',
 							 'warnings'                => '1.05',
