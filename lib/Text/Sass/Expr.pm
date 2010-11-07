@@ -1,7 +1,7 @@
 #########
 # Author:        rmp
-# Last Modified: $Date: 2010-10-28 17:09:19 +0100 (Thu, 28 Oct 2010) $
-# Id:            $Id: Expr.pm 19 2010-10-28 16:09:19Z zerojinx $
+# Last Modified: $Date: 2010-11-07 07:59:39 +0000 (Sun, 07 Nov 2010) $
+# Id:            $Id: Expr.pm 53 2010-11-07 07:59:39Z bolav $
 # Source:        $Source$
 # $HeadURL: https://text-sass.svn.sourceforge.net/svnroot/text-sass/trunk/lib/Text/Sass/Expr.pm $
 #
@@ -74,6 +74,7 @@ sub expr {
 
   my ($p1, $u1) = @{$pkg->units($part1)};
   my ($p2, $u2) = @{$pkg->units($part2)};
+  return if(!defined $p1);
 
   if(!$u1 && $u2) {
     $u1 = $u2;
@@ -91,6 +92,12 @@ sub expr {
   }
 
   if(!exists $OPS->{$op}) {
+    if ($op =~ /^\w/smx) {
+      return;
+    }
+    elsif ($op =~ /\S{2,}/smx) {
+      return;
+    }
     croak qq[Cannot "$op"];
   }
 
@@ -111,7 +118,7 @@ sub units {
     return [$pkg->hex_to_rgb($token), q[#]];
   }
 
-  my ($val, $units) = $token =~ /(\d+)(px|pt|pc|em|ex|mm|cm|in|%|)/smx;
+  my ($val, $units) = $token =~ /([\d\.]+)(px|pt|pc|em|ex|mm|cm|in|%|)/smx;
 
   return [$val, $units];
 }
@@ -148,7 +155,7 @@ Text::Sass::Expr
 
 =head1 VERSION
 
-$LastChangedRevision: 19 $
+$LastChangedRevision: 53 $
 
 =head1 SYNOPSIS
 

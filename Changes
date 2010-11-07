@@ -1,5 +1,7 @@
 Changelog for Text-Sass
 
+0.9 - Function & SCSS support from Bjørn-Olav
+
 0.8 - Flexible indentation fixes, from Bjørn-Olav
       Retain declaration order, from Bjørn-Olav
 

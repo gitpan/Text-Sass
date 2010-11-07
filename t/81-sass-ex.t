@@ -8,15 +8,15 @@ use Test::More tests => 4;
 {
   my $css  = <<EOT;
 .content-navigation {
-   border-color: #3bbfce;
-   color: #2b9eab;
- }
+  border-color: #3bbfce;
+  color: #2ba1af;
+}
 
- .border {
-   padding: 8px;
-   margin: 8px;
-   border-color: #3bbfce;
- }
+.border {
+  padding: 8px;
+  margin: 8px;
+  border-color: #3bbfce;
+}
 EOT
 
   my $sass = <<EOT;
@@ -33,7 +33,6 @@ EOT
   margin: \$margin / 2
   border-color: \$blue
 EOT
-  local $TODO = "no support for functions yet";
   my $ts = Text::Sass->new();
 
   is($ts->sass2css($sass), $css, "variables examples");

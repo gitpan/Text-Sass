@@ -1,9 +1,9 @@
-Text-Sass - A Perl implementation of Sass http://sass-lang.com/
+Text-Sass - A Perl implementation of Sass & SCSS http://sass-lang.com/
 
 This is most definitely a work-in-progress. It only implements a
 subset of the specification but it's being actively developed so if
 there's functionality missing, drop me a line at rmp@psyphi.net and
-send me a patch.
+send me patches and tests.
 
 And yes, this should all really be done with a proper language tools,
 i.e. grammar, parser, tokeniser etc.
@@ -14,3 +14,14 @@ Bugs & Limitations
      ...
 
  - Variables are currently global. This can be quite unpleasant.
+
+There is no support for colorfunctions. 
+There is no support for @extends.
+No support of default for values.
+No support for #{} interpolation.
+No support for @import of sass and scss.
+No support for @debug.
+No support for @warn.
+No support for @if.
+No support for @for.
+No support for @while.

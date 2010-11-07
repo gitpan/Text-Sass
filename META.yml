@@ -16,21 +16,23 @@ name: Text-Sass
 provides:
   Text::Sass:
     file: lib/Text/Sass.pm
-    version: v0.8.1
-  Text::Sass::ColorFunctions:
-    file: lib/Text/Sass/ColorFunctions.pm
-    version: 0.1
+    version: 0.9
   Text::Sass::Expr:
     file: lib/Text/Sass/Expr.pm
+    version: 0.1
+  Text::Sass::Functions:
+    file: lib/Text/Sass/Functions.pm
     version: 0.1
 recommends:
   Data::Dumper: 2.125
 requires:
   Carp: 1.04
+  Convert::Color: 0.05
   English: 1.02
+  POSIX: 1.19
   Readonly: 1.03
   strict: 1.03
   warnings: 1.05
 resources:
   license: http://dev.perl.org/licenses/
-version: v0.8.1
+version: 0.9
