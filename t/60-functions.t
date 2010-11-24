@@ -3,7 +3,7 @@ use warnings;
 use Text::Sass;
 use Test::More tests => 39;
 
-use ok "Text::Sass::Functions";
+use_ok('Text::Sass::Functions');
 # $Text::Sass::DEBUG = 1;
 
 my $cf = Text::Sass::Functions->new;
@@ -29,8 +29,8 @@ my $cf = Text::Sass::Functions->new;
   is($cf->hsl(90,'50%','50%'), '#7fbf3f', 'hsl');
   # hsla
   is($cf->hue('#7fbf3f'), 90, 'hue');
-  is($cf->saturation('#7fbf3f'), 0.503937007874016, 'saturation');
-  is($cf->lightness('#7fbf3f'), 0.498039215686275, 'lightness');
+  is((sprintf q[%0.2f], $cf->saturation('#7fbf3f')), (sprintf q[%0.2f], 0.503937007874016), 'saturation');
+  is((sprintf q[%0.2f], $cf->lightness('#7fbf3f')), (sprintf q[%0.2f], 0.498039215686275), 'lightness');
   is($cf->adjusthue('#811', 45), '#886a10', 'adjust-hue');
   is($cf->lighten('#800', '20%'), '#ee0000', 'lighten');
   is($cf->darken('#3bbfce', '9%'), '#2ba1af', 'darken 1');
