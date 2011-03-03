@@ -1,7 +1,7 @@
 #########
 # Author:        bolav
-# Last Modified: $Date: 2010-11-07 20:25:32 +0000 (Sun, 07 Nov 2010) $
-# Id:            $Id: Functions.pm 54 2010-11-07 20:25:32Z zerojinx $
+# Last Modified: $Date: 2011-03-03 17:04:59 +0000 (Thu, 03 Mar 2011) $
+# Id:            $Id: Functions.pm 59 2011-03-03 17:04:59Z zerojinx $
 # Source:        $Source$
 # $HeadURL: https://text-sass.svn.sourceforge.net/svnroot/text-sass/trunk/lib/Text/Sass/Functions.pm $
 #
@@ -131,12 +131,15 @@ sub lightness {
   return $self->_color($color)->as_hsl->lightness;
 }
 
-sub adjusthue {
+sub adjust_hue {
   my ($self, $color, $value) = @_;
 
-  my $cc  = $self->_color($color);
-  my $hsl = $cc->as_hsl;
-  my $new_hsl = Convert::Color->new( q[hsl:].($hsl->hue+$value).q[,].$hsl->saturation.q[,].$hsl->lightness);
+  my $cc      = $self->_color($color);
+  my $hsl     = $cc->as_hsl;
+  my $new_hsl = Convert::Color->new( sprintf q[hsl:%s,%s,%s],
+				     $hsl->hue+$value,
+				     $hsl->saturation,
+				     $hsl->lightness );
 
   return q[#].$new_hsl->as_rgb8->hex;
 }
@@ -147,7 +150,10 @@ sub lighten {
   $value      = $self->_value($value);
   my $cc      = $self->_color($color);
   my $hsl     = $cc->as_hsl;
-  my $new_hsl = Convert::Color->new( q[hsl:].$hsl->hue.q[,].$hsl->saturation.q[,].($hsl->lightness+$value));
+  my $new_hsl = Convert::Color->new( sprintf q[hsl:%s,%s,%s],
+				     $hsl->hue,
+				     $hsl->saturation,
+				     $hsl->lightness+$value );
 
   return q[#].$new_hsl->as_rgb8->hex;
 }
@@ -158,7 +164,10 @@ sub darken {
   $value      = $self->_value($value);
   my $cc      = $self->_color($color);
   my $hsl     = $cc->as_hsl;
-  my $new_hsl = Convert::Color->new( q[hsl:].$hsl->hue.q[,].$hsl->saturation.q[,].($hsl->lightness-$value));
+  my $new_hsl = Convert::Color->new( sprintf q[hsl:%s,%s,%s],
+				     $hsl->hue,
+				     $hsl->saturation,
+				     $hsl->lightness-$value );
 
   return q[#].$new_hsl->as_rgb8->hex;
 }
@@ -169,7 +178,10 @@ sub saturate {
   $value  = $self->_value($value);
   my $cc  = $self->_color($color);
   my $hsl = $cc->as_hsl;
-  my $new_hsl = Convert::Color->new( q[hsl:].$hsl->hue.q[,].($hsl->saturation+$value).q[,].$hsl->lightness);
+  my $new_hsl = Convert::Color->new( sprintf q[hsl:%s,%s,%s],
+				     $hsl->hue,
+				     $hsl->saturation+$value,
+				     $hsl->lightness );
 
   return q[#].$new_hsl->as_rgb8->hex;
 }
@@ -186,7 +198,10 @@ sub desaturate {
       $sat = 0;
   }
 
-  my $new_hsl = Convert::Color->new( q[hsl:].$hsl->hue.q[,].$sat.q[,].$hsl->lightness);
+  my $new_hsl = Convert::Color->new( sprintf q[hsl:%s,%s,%s],
+				     $hsl->hue,
+				     $sat,
+				     $hsl->lightness );
 
   return q[#].$new_hsl->as_rgb8->hex;
 }
@@ -201,7 +216,7 @@ sub complement {
   my ($self, $color) = @_;
 
   Readonly::Scalar my $COMP_DEGREES => 180;
-  return $self->adjusthue($color, $COMP_DEGREES);
+  return $self->adjust_hue($color, $COMP_DEGREES);
 }
 
 #########
@@ -294,7 +309,7 @@ Text::Sass::Functions
 
 =head1 VERSION
 
-$LastChangedRevision: 54 $
+$LastChangedRevision: 59 $
 
 =head1 SYNOPSIS
 
@@ -342,7 +357,7 @@ Returns the saturation part of a color.
 
 Returns the lightness part of a color.
 
-=head2 adjusthue(color)
+=head2 adjust_hue(color)
 
 Changes the hue of a color, can be called as adjust-hue.
 

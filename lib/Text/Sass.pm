@@ -1,7 +1,7 @@
 #########
 # Author:        rmp
-# Last Modified: $Date: 2010-11-24 09:18:28 +0000 (Wed, 24 Nov 2010) $
-# Id:            $Id: Sass.pm 57 2010-11-24 09:18:28Z zerojinx $
+# Last Modified: $Date: 2011-03-03 17:04:59 +0000 (Thu, 03 Mar 2011) $
+# Id:            $Id: Sass.pm 59 2011-03-03 17:04:59Z zerojinx $
 # Source:        $Source$
 # $HeadURL: https://text-sass.svn.sourceforge.net/svnroot/text-sass/trunk/lib/Text/Sass.pm $
 #
@@ -18,7 +18,7 @@ use Text::Sass::Expr;
 use Text::Sass::Functions;
 use Data::Dumper;
 
-our $VERSION = q[0.9.1];
+our $VERSION = q[0.9.2];
 our $DEBUG   = 0;
 
 sub new {
@@ -554,7 +554,6 @@ sub _stash2css {
 	      if($attr) {
 		$attr = sprintf q[ %s], $attr;
 	      }
-
 	      my $rattr = $k . ($attr ? $attr : q[]);
 
 	      if($k =~ /,/smx) {
@@ -612,11 +611,19 @@ sub _expr {
       #########
       # We want adjust-hue to work
       #
-      $func =~ s/\-//gsmx;
-
+      $func =~ s/\-/_/gsmx;
       if (!$functions->can($func)) {
         $start = $self->_expr($stash, $symbols, $start);
         $end   = $self->_expr($stash, $symbols, $end);
+
+	#########
+	# not happy with this here. It probably at least belongs in Expr
+	# - and should include any other CSS stop-words
+	#
+	if($end =~ /repeat/smx) { ## no-repeat, repeat-x, repeat-y
+	  $end = q[];
+	}
+
         $expr  = $start . $mstr . $end;
         last;
       }
@@ -680,7 +687,7 @@ Text::Sass
 
 =head1 VERSION
 
-$LastChangedRevision: 57 $
+$LastChangedRevision: 59 $
 
 =head1 SYNOPSIS
 

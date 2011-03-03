@@ -1,5 +1,7 @@
 Changelog for Text-Sass
 
+0.9.2 - background: url(xxx) no-repeat fix from mk@bluepipe.dk RT#66349
+
 0.9.1 - test fixes - fpu platform differences & RT#63256
 
 0.9 - Function & SCSS support from Bjørn-Olav

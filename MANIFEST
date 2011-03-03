@@ -23,6 +23,7 @@ t/50-space.t
 t/60-functions.t
 t/81-sass-ex.t
 t/82-sass-ex.t
+t/90-regression-background.t
 t/90-regression-bos.t
 t/90-regression-wikipedia-nowhitespace.t
 t/90-regression-wikipedia-parentref.t

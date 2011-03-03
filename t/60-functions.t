@@ -31,14 +31,14 @@ my $cf = Text::Sass::Functions->new;
   is($cf->hue('#7fbf3f'), 90, 'hue');
   is((sprintf q[%0.2f], $cf->saturation('#7fbf3f')), (sprintf q[%0.2f], 0.503937007874016), 'saturation');
   is((sprintf q[%0.2f], $cf->lightness('#7fbf3f')), (sprintf q[%0.2f], 0.498039215686275), 'lightness');
-  is($cf->adjusthue('#811', 45), '#886a10', 'adjust-hue');
+  is($cf->adjust_hue('#811', 45), '#886a10', 'adjust-hue');
   is($cf->lighten('#800', '20%'), '#ee0000', 'lighten');
   is($cf->darken('#3bbfce', '9%'), '#2ba1af', 'darken 1');
   is($cf->darken('#800', '20%'), '#220000', 'darken 2');
   is($cf->saturate('#855', '20%'), '#9e3e3e', 'saturate');
   is($cf->desaturate('#855', '20%'), '#716b6b', 'desaturate');
   is($cf->grayscale('#855'), $cf->desaturate('#855', '100%'), 'grayscale');
-  is($cf->complement('#f00'), $cf->adjusthue('#f00', 180), 'complement');
+  is($cf->complement('#f00'), $cf->adjust_hue('#f00', 180), 'complement');
 }
 
 # String
