@@ -1,7 +1,7 @@
 #########
 # Author:        rmp
-# Last Modified: $Date: 2010-11-07 20:25:32 +0000 (Sun, 07 Nov 2010) $
-# Id:            $Id: Build.PL 54 2010-11-07 20:25:32Z zerojinx $
+# Last Modified: $Date: 2011-11-05 22:04:35 +0000 (Sat, 05 Nov 2011) $
+# Id:            $Id: Build.PL 62 2011-11-05 22:04:35Z zerojinx $
 # Source:        $Source$
 # $HeadURL: https://text-sass.svn.sourceforge.net/svnroot/text-sass/trunk/Build.PL $
 #
@@ -23,7 +23,7 @@ my $builder = Module::Build->new(
 							 'strict'                  => '1.03',
 							 'warnings'                => '1.05',
 							 'Convert::Color'          => '0.05',
-							 'POSIX'                   => '1.19',
+							 'POSIX'                   => '1.09',
 							},
 				 recommends          => {
 							 'Data::Dumper'            => '2.125',
