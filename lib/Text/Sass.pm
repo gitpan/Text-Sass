@@ -1,7 +1,7 @@
 #########
 # Author:        rmp
-# Last Modified: $Date: 2011-03-03 17:10:25 +0000 (Thu, 03 Mar 2011) $
-# Id:            $Id: Sass.pm 60 2011-03-03 17:10:25Z zerojinx $
+# Last Modified: $Date: 2011-11-05 22:15:58 +0000 (Sat, 05 Nov 2011) $
+# Id:            $Id: Sass.pm 64 2011-11-05 22:15:58Z zerojinx $
 # Source:        $Source$
 # $HeadURL: https://text-sass.svn.sourceforge.net/svnroot/text-sass/trunk/lib/Text/Sass.pm $
 #
@@ -18,7 +18,7 @@ use Text::Sass::Expr;
 use Text::Sass::Functions;
 use Data::Dumper;
 
-our $VERSION = q[0.9.3];
+our $VERSION = q[0.93];
 our $DEBUG   = 0;
 
 sub new {
@@ -687,7 +687,7 @@ Text::Sass
 
 =head1 VERSION
 
-$LastChangedRevision: 60 $
+$LastChangedRevision: 64 $
 
 =head1 SYNOPSIS
 
