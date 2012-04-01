@@ -25,6 +25,7 @@ t/50-space.t
 t/60-functions.t
 t/81-sass-ex.t
 t/82-sass-ex.t
+t/90-regression-aa-74181.t
 t/90-regression-aa.t
 t/90-regression-background.t
 t/90-regression-bos.t

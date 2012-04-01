@@ -1,7 +1,7 @@
 #########
 # Author:        rmp
-# Last Modified: $Date: 2012-04-01 22:15:03 +0100 (Sun, 01 Apr 2012) $
-# Id:            $Id: Sass.pm 67 2012-04-01 21:15:03Z zerojinx $
+# Last Modified: $Date: 2012-04-01 23:59:34 +0100 (Sun, 01 Apr 2012) $
+# Id:            $Id: Sass.pm 69 2012-04-01 22:59:34Z zerojinx $
 # Source:        $Source$
 # $HeadURL: https://text-sass.svn.sourceforge.net/svnroot/text-sass/trunk/lib/Text/Sass.pm $
 #
@@ -18,7 +18,7 @@ use Text::Sass::Expr;
 use Text::Sass::Functions;
 use Data::Dumper;
 
-our $VERSION = q[0.94];
+our $VERSION = q[0.95];
 our $DEBUG   = 0;
 
 sub new {
@@ -57,7 +57,6 @@ sub sass2css {
   my $chain   = [];
   $self->{_sass_indent} = 0;
   $self->_parse_sass($str, $stash, $symbols, $chain);
-
   return $self->_stash2css($stash, $symbols);
 }
 
@@ -93,7 +92,6 @@ sub _parse_sass {
   #   code
   #
   $str =~ s/^\s*\n(\s+)/$1/smxg;
-
   my $groups = [split /\n\s*?\n/smx, $str];
   for my $g (@{$groups}) {
     my @lines = split /\n/smx, $g;
@@ -493,13 +491,23 @@ sub _parse_css {
       $key   =~ s/\s+$//smx;
       $value =~ s/^\s+//smx;
       $value =~ s/\s+$//smx;
-
       push @{$ssubstash}, { $key => $value };
     }
 
-    push @{$substash}, { $tokens => $ssubstash };
-  }
+    #########
+    # post-process parent references '&'
+    #
+    my $parent_processed= [];
+    for my $child (@{$ssubstash}) {
+      my ($k) = keys %{$child};
+      my ($v) = $child->{$k};
+      $k      =~ s{(.*)&}{&$1$tokens}smx;
 
+      push @{$parent_processed}, { $k => $v };
+    }
+
+    push @{$substash}, { $tokens => $parent_processed };
+  }
   return 1;
 }
 
@@ -688,7 +696,7 @@ Text::Sass
 
 =head1 VERSION
 
-$LastChangedRevision: 67 $
+$LastChangedRevision: 69 $
 
 =head1 SYNOPSIS
 
