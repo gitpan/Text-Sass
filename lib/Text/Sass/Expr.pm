@@ -1,7 +1,7 @@
 #########
 # Author:        rmp
-# Last Modified: $Date: 2010-11-07 07:59:39 +0000 (Sun, 07 Nov 2010) $
-# Id:            $Id: Expr.pm 53 2010-11-07 07:59:39Z bolav $
+# Last Modified: $Date: 2012-04-01 22:14:05 +0100 (Sun, 01 Apr 2012) $
+# Id:            $Id: Expr.pm 66 2012-04-01 21:14:05Z zerojinx $
 # Source:        $Source$
 # $HeadURL: https://text-sass.svn.sourceforge.net/svnroot/text-sass/trunk/lib/Text/Sass/Expr.pm $
 #
@@ -76,6 +76,14 @@ sub expr {
   my ($p2, $u2) = @{$pkg->units($part2)};
   return if(!defined $p1);
 
+  if(!$u1) {
+    $u1 = q[];
+  }
+
+  if(!$u2) {
+    $u2 = q[];
+  }
+
   if(!$u1 && $u2) {
     $u1 = $u2;
   }
@@ -118,7 +126,7 @@ sub units {
     return [$pkg->hex_to_rgb($token), q[#]];
   }
 
-  my ($val, $units) = $token =~ /([\d\.]+)(px|pt|pc|em|ex|mm|cm|in|%|)/smx;
+  my ($val, $units) = $token =~ /([\d.]+)(px|pt|pc|em|ex|mm|cm|in|%|)/smx;
 
   return [$val, $units];
 }
@@ -155,7 +163,7 @@ Text::Sass::Expr
 
 =head1 VERSION
 
-$LastChangedRevision: 53 $
+$LastChangedRevision: 66 $
 
 =head1 SYNOPSIS
 

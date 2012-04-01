@@ -1,7 +1,7 @@
 #########
 # Author:        rmp
-# Last Modified: $Date: 2011-11-05 22:15:58 +0000 (Sat, 05 Nov 2011) $
-# Id:            $Id: Sass.pm 64 2011-11-05 22:15:58Z zerojinx $
+# Last Modified: $Date: 2012-04-01 22:15:03 +0100 (Sun, 01 Apr 2012) $
+# Id:            $Id: Sass.pm 67 2012-04-01 21:15:03Z zerojinx $
 # Source:        $Source$
 # $HeadURL: https://text-sass.svn.sourceforge.net/svnroot/text-sass/trunk/lib/Text/Sass.pm $
 #
@@ -18,7 +18,7 @@ use Text::Sass::Expr;
 use Text::Sass::Functions;
 use Data::Dumper;
 
-our $VERSION = q[0.93];
+our $VERSION = q[0.94];
 our $DEBUG   = 0;
 
 sub new {
@@ -429,7 +429,7 @@ sub _parse_css {
   my $groups = $self->_css_nestedgroups($str);
 
   for my $g (@{$groups}) {
-    my ($tokens, $block) = $g =~ m/([^\{]*)\{(.*)\}/smxg;
+    my ($tokens, $block) = $g =~ m/([^{]*)[{](.*)[}]/smxg;
     $tokens =~ s/^\s+//smx;
     $tokens =~ s/\s+$//smx;
     $tokens =~ s/\n\s+/\n/smx;
@@ -461,7 +461,7 @@ sub _parse_css {
         my $subsymbols = $symbols; # todo: correct scoping - is better as {%{$symbols}}
         my $values     = $argstr ? [split /\s*,\s*/smx, $argstr] : [];
         my ($varstr)   = $mixin_str =~ /^.*?[(](.*?)[)]/smx;
-        my ($proto)    = $mixin_str =~ /^\s*([^\{]*\S)\s*\{/smx;
+        my ($proto)    = $mixin_str =~ /^\s*([^{]*\S)\s*[{]/smx;
         my $vars       = $varstr ? [split /\s*,\s*/smx, $varstr] : [];
 
         for my $var (@{$vars}) {
@@ -483,7 +483,7 @@ sub _parse_css {
         next;
       }
 
-      if ($kv =~ /\{.*\}/smx) {
+      if ($kv =~ /[{].*[}]/smx) {
         $self->_parse_css( $kv, $ssubstash, $symbols );
         next;
       }
@@ -520,7 +520,7 @@ sub _stash2css {
 	$k = $vk;
       }
 
-      my $str .= "$vk {\n";
+      my $str = "$vk {\n";
       if(!ref $stash_line->{$k}) {
 	$str .= sprintf q[ %s: %s], $vk, $stash_line->{$k};
 
@@ -570,6 +570,7 @@ sub _stash2css {
 	      push @{$delayed}, $self->_stash2css([{$rattr => $val}], $symbols);
 	      next;
 	    }
+
 	    $str .= sprintf qq[  %s: %s;\n], $attr, $self->_expr($stash, $symbols, $val);
 	  }
 	}
@@ -601,7 +602,7 @@ sub _expr {
 
     # TODO: should have rest, so that url() will work
 
-    while ($expr =~ /^(.*?)((\S+)\s*\(([^\)]+)\)(.*)$)/smx) {
+    while ($expr =~ /^(.*?)((\S+)\s*[(]([^)]+)[)](.*)$)/smx) {
       my $start  = $1;
       my $mstr   = $2;
       my $func   = $3;
@@ -609,7 +610,7 @@ sub _expr {
       my $end    = $5;
 
       #########
-      # We want adjust-hue to work
+      # We want hyphenated 'adjust-hue' to work
       #
       $func =~ s/\-/_/gsmx;
       if (!$functions->can($func)) {
@@ -620,7 +621,7 @@ sub _expr {
 	# not happy with this here. It probably at least belongs in Expr
 	# - and should include any other CSS stop-words
 	#
-	if($end =~ /repeat/smx) { ## no-repeat, repeat-x, repeat-y
+	if($end =~ /repeat|left|top|right|bottom/smx) { ## no-repeat, repeat-x, repeat-y
 	  $end = q[];
 	}
 
@@ -631,7 +632,7 @@ sub _expr {
       #########
       # TODO: Should support darken(#323, something(4+5, 5))
       #
-      my @vars = split/\,/smx, $varstr;
+      my @vars = split /,/smx, $varstr;
       for my $var (@vars) {
 	$var =~ s/^\s//smx;
 	$var = $self->_expr($stash, $symbols, $var);
@@ -663,7 +664,7 @@ sub _stash2sass {
 
   for my $stashline (@{$stash}) {
     for my $k (keys %{$stashline}) {
-      my $str .= "$k\n";
+      my $str = "$k\n";
 
       for my $attrline (@{$stashline->{$k}}){
         for my $attr (sort keys %{$attrline}) {
@@ -687,7 +688,7 @@ Text::Sass
 
 =head1 VERSION
 
-$LastChangedRevision: 64 $
+$LastChangedRevision: 67 $
 
 =head1 SYNOPSIS
 

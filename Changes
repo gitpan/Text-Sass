@@ -1,5 +1,7 @@
 Changelog for Text-Sass
 
+0.94 - bugfix for RT#74160 from Andrei Arsenin
+
 0.93 - kicked version number
 
 0.9.3 - downgraded POSIX requirement - RT#72204
