@@ -1,5 +1,8 @@
 Changelog for Text-Sass
 
+0.96 - #77718 pod encoding bug from ANDK
+     - improved URL handling, tests from Dan Markham
+
 0.95 - bugfix for RT#74181 from Andrei Arsenin
 
 0.94 - bugfix for RT#74160 from Andrei Arsenin

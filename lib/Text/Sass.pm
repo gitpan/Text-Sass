@@ -1,8 +1,9 @@
+# -*- mode: cperl; tab-width: 8; indent-tabs-mode: nil; basic-offset: 2 -*-
+# vim:ts=8:sw=2:et:sta:sts=2
 #########
 # Author:        rmp
-# Last Modified: $Date: 2012-04-01 23:59:34 +0100 (Sun, 01 Apr 2012) $
-# Id:            $Id: Sass.pm 69 2012-04-01 22:59:34Z zerojinx $
-# Source:        $Source$
+# Last Modified: $Date: 2012-09-12 09:42:30 +0100 (Wed, 12 Sep 2012) $
+# Id:            $Id: Sass.pm 71 2012-09-12 08:42:30Z zerojinx $
 # $HeadURL: https://text-sass.svn.sourceforge.net/svnroot/text-sass/trunk/lib/Text/Sass.pm $
 #
 # Note to reader:
@@ -18,7 +19,7 @@ use Text::Sass::Expr;
 use Text::Sass::Functions;
 use Data::Dumper;
 
-our $VERSION = q[0.95];
+our $VERSION = q[0.96];
 our $DEBUG   = 0;
 
 sub new {
@@ -486,7 +487,7 @@ sub _parse_css {
         next;
       }
 
-      my ($key, $value) = split /:/smx, $kv;
+      my ($key, $value) = split /:/smx, $kv, 2;
       $key   =~ s/^\s+//smx;
       $key   =~ s/\s+$//smx;
       $value =~ s/^\s+//smx;
@@ -690,13 +691,15 @@ sub _stash2sass {
 1;
 __END__
 
+=encoding utf8
+
 =head1 NAME
 
 Text::Sass
 
 =head1 VERSION
 
-$LastChangedRevision: 69 $
+$LastChangedRevision: 71 $
 
 =head1 SYNOPSIS
 

@@ -25,3 +25,7 @@ No support for @warn.
 No support for @if.
 No support for @for.
 No support for @while.
+
+Other than that, you're good to go.
+
+Thanks to Bjørn-Olav Strand, Andreas König, Dan Markham and others for patches.

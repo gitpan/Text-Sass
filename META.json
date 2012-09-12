@@ -4,7 +4,7 @@
       "Roger Pettett <rmp@psyphi.net>"
    ],
    "dynamic_config" : 1,
-   "generated_by" : "Module::Build version 0.38, CPAN::Meta::Converter version 2.112150",
+   "generated_by" : "Module::Build version 0.3901, CPAN::Meta::Converter version 2.120630",
    "license" : [
       "perl_5"
    ],
@@ -22,7 +22,7 @@
       },
       "configure" : {
          "requires" : {
-            "Module::Build" : "0.38"
+            "Module::Build" : "0.39"
          }
       },
       "runtime" : {
@@ -43,7 +43,7 @@
    "provides" : {
       "Text::Sass" : {
          "file" : "lib/Text/Sass.pm",
-         "version" : "0.95"
+         "version" : "0.96"
       },
       "Text::Sass::Expr" : {
          "file" : "lib/Text/Sass/Expr.pm",
@@ -60,5 +60,5 @@
          "http://dev.perl.org/licenses/"
       ]
    },
-   "version" : "0.95"
+   "version" : "0.96"
 }

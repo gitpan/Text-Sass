@@ -1,7 +1,6 @@
 Changes
 MANIFEST
 MANIFEST.SKIP
-META.json
 MYMETA.json
 Makefile
 README
@@ -38,3 +37,4 @@ t/93-parentref-comma.t
 t/RT-62474-accept-spaces.t
 Build.PL
 META.yml
+META.json

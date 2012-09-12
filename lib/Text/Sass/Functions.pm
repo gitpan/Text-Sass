@@ -1,8 +1,9 @@
+# -*- mode: cperl; tab-width: 8; indent-tabs-mode: nil; basic-offset: 2 -*-
+# vim:ts=8:sw=2:et:sta:sts=2
 #########
 # Author:        bolav
-# Last Modified: $Date: 2011-03-03 17:04:59 +0000 (Thu, 03 Mar 2011) $
-# Id:            $Id: Functions.pm 59 2011-03-03 17:04:59Z zerojinx $
-# Source:        $Source$
+# Last Modified: $Date: 2012-09-12 09:42:30 +0100 (Wed, 12 Sep 2012) $
+# Id:            $Id: Functions.pm 71 2012-09-12 08:42:30Z zerojinx $
 # $HeadURL: https://text-sass.svn.sourceforge.net/svnroot/text-sass/trunk/lib/Text/Sass/Functions.pm $
 #
 package Text::Sass::Functions;
@@ -303,13 +304,15 @@ sub unitless {
 
 __END__
 
+=encoding utf8
+
 =head1 NAME
 
 Text::Sass::Functions
 
 =head1 VERSION
 
-$LastChangedRevision: 59 $
+$LastChangedRevision: 71 $
 
 =head1 SYNOPSIS
 

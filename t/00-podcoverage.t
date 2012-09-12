@@ -1,8 +1,9 @@
+# -*- mode: cperl; tab-width: 8; indent-tabs-mode: nil; basic-offset: 2 -*-
+# vim:ts=8:sw=2:et:sta:sts=2
 #########
 # Author:        rmp
-# Last Modified: $Date: 2010-10-28 17:09:19 +0100 (Thu, 28 Oct 2010) $
-# Id:            $Id: 00-podcoverage.t 19 2010-10-28 16:09:19Z zerojinx $
-# Source:        $Source$
+# Last Modified: $Date: 2012-09-12 09:42:30 +0100 (Wed, 12 Sep 2012) $
+# Id:            $Id: 00-podcoverage.t 71 2012-09-12 08:42:30Z zerojinx $
 # $HeadURL: https://text-sass.svn.sourceforge.net/svnroot/text-sass/trunk/t/00-podcoverage.t $
 #
 use Test::More;
