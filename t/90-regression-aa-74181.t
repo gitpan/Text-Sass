@@ -2,13 +2,13 @@
 # vim:ts=8:sw=2:et:sta:sts=2
 #########
 # Author:        rmp
-# Last Modified: $Date: 2012-09-12 09:42:30 +0100 (Wed, 12 Sep 2012) $
-# Id:            $Id: 90-regression-aa-74181.t 71 2012-09-12 08:42:30Z zerojinx $
+# Last Modified: $Date: 2012-11-10 16:33:37 +0000 (Sat, 10 Nov 2012) $
+# Id:            $Id: 90-regression-aa-74181.t 75 2012-11-10 16:33:37Z zerojinx $
 # $HeadURL: https://text-sass.svn.sourceforge.net/svnroot/text-sass/trunk/t/90-regression-aa-74181.t $
 #
 use strict;
 use warnings;
-use Text::Sass '0.94';
+use Text::Sass '0.97';
 use Test::More tests => 2;
 
 {

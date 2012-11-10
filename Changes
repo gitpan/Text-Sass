@@ -1,5 +1,8 @@
 Changelog for Text-Sass
 
+0.97 - #80831 comma-separated selectors from BGRIMM
+       #80927 scss to css for nested includes from BGRIMM
+
 0.96 - #77718 pod encoding bug from ANDK
      - improved URL handling, tests from Dan Markham
 

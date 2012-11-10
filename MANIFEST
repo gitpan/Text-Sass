@@ -35,6 +35,9 @@ t/91-keep-order.t
 t/92-no-whitespace.t
 t/93-parentref-comma.t
 t/RT-62474-accept-spaces.t
+t/RT-80831-commasep-selectors.t
+t/RT-80927-nested-includes.t
+t/RT-80978-nested-ampersand-includes.t
 Build.PL
 META.yml
 META.json

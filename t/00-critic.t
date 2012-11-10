@@ -2,8 +2,8 @@
 # vim:ts=8:sw=2:et:sta:sts=2
 #########
 # Author:        rmp
-# Last Modified: $Date: 2012-09-12 09:42:30 +0100 (Wed, 12 Sep 2012) $
-# Id:            $Id: 00-critic.t 71 2012-09-12 08:42:30Z zerojinx $
+# Last Modified: $Date: 2012-11-10 16:33:37 +0000 (Sat, 10 Nov 2012) $
+# Id:            $Id: 00-critic.t 75 2012-11-10 16:33:37Z zerojinx $
 # $HeadURL: https://text-sass.svn.sourceforge.net/svnroot/text-sass/trunk/t/00-critic.t $
 #
 package critic;
@@ -30,7 +30,6 @@ if($EVAL_ERROR) {
   Test::Perl::Critic->import(
 			     -severity => 1,
 			     -exclude => [qw(CodeLayout::RequireTidyCode
-					     ValuesAndExpressions::ProhibitImplicitNewlines
 					     NamingConventions::Capitalization
 					     PodSpelling
  					     ValuesAndExpressions::RequireConstantVersion
